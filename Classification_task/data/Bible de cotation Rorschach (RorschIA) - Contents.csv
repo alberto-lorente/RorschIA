@@ -1,0 +1,30 @@
+Name,Description,French code,Example,General categories,Hierachies
+Human,Realistic whole human,H,two men,Human,
+Fictional human,Fictional whole human; Caricature of a human being,(H),an angel; Disney pseudo-human characters,Human,
+Human detail,"Realistic partial human; Parts of a human, usually seen exernally (not internal, dissected, or anatomical parts of a human)",Hd,a leg,Human,
+Fictional human detail,Fictional partial human,(Hd),a devil's head,Human,
+Hybrid,Human merged with animal,H/A,a butterfly-man,Human / Animal,
+Hybrid detail,Human with animal aspects,H/Ad,a man with wings,Human / Animal,
+Animal,Realistic whole animal,A,a bird,Animal,
+Fictional animal,Fictional whole animal,(A),A dragon,Animal,
+Animal detail,"Realistic partial animal; Parts of an animal, usually seen externally (not internal, dissected, or anatomical parts of an animal)",Ad,A cat's head,Animal,
+Fictional animal detail,Fictional partial animal,(Ad),Dragon's wings,Animal,
+Sexual,Sexual organs or activity,Sex,a vagina,Body related,
+Anatomy,"Any anatomical, dissected, or generally internal part of the body, whether animal or human",Anat,a skull,Body related,X-ray>Anatomy
+X-ray,A radiographic view of internal organs,Radio,the ribs; vertebral column; echography,Body related,X-ray>Anatomy
+Blood,Any reference to blood,Sg,flow of blood,Body related,
+Object,"All inanimate, movable, manufactured objects, including household objects",Obj,a basin,Object related,Mask>Cloth>Object
+Cloth,Anything reference to clothing or garments,Vêt,a pullover,Object related,Mask>Cloth>Object
+Mask,Mask or prosthesis that modifies the face,Mq,carnival mask,Object related,Mask>Cloth>Object
+Food,Any reference to food or edible elements,Alim,an ice cream cone,Object related,Food>Botany/Object
+Botany,"Any reference to trees, flowers and plants",Bot,a flower,Physical environment,Landscape>Botany
+Landscape,Any reference to a scene of the countryside,Pays,a sunset reflected on a lake; a cave; mountains; valleys,Physical environment,Landscape>Botany
+Geography,"Any geographical forms, including maps and scenes not actually seen in perspective",Géo,the bottom of Italy's boot,Physical environment,
+Elements,"Any reference to fire, water, wind or earth",Elem,fire; water,Physical environment,
+Science,Any reference to sciences and techniques,Sc,a microscope,Human creations,
+Art,Reference to any artistic production,Art,a Dali painting,Human creations,Architecture>Art>Symbol
+Architecture,Architectural forms generally,Arch,the Eiffel tower; buildings; bridges,Human creations,Architecture>Art>Symbol
+Symbol,"Symbols as letters, numbers, or emblems",Symb,the V of victory; alphabetical letters; religious symbols,Others,Architecture>Art>Symbol
+Abstraction,Abstract concept,Abs,the death; the happiness,Others,
+Fragment,Fragmented elements,Frag,Cloud; Dust Heaps; ink-blot,Others,
+Multiple contents,Two or three contents in the same answer,Content 1 / Content 2,a stone that has just been thrown into the water with the splash of water (Elem / Frag),Multiple,
