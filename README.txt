@@ -1,4 +1,3 @@
-Link: https://drive.google.com/drive/folders/15SZxluaLhvE8ix5awJNdvVTAaoq02bGf?usp=sharing
 
 Prototype for RorschIA 07-04 for French.
 
