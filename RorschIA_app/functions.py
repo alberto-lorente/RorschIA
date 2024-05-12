@@ -13,6 +13,7 @@ import spacy
 import pickle
 from sentence_transformers import SentenceTransformer
 
+
 nlp = spacy.load('en_core_web_sm')
 
 def get_responses(raw_text):
@@ -95,9 +96,9 @@ def get_responses(raw_text):
 
     # add language detector is it english or french? - if 
 
-    with open("DEEPL_API_KEY.txt", "r") as f:
+    with open("RorschIA_app/DEEPL_API_KEY.txt", "r") as f:
       API_KEY = f.read()
-    
+      API_KEY = API_KEY.strip("\n")
     # print("API Key Found!")
 
 
@@ -336,7 +337,7 @@ def preprocess_text_for_transformer(text):
 
 def evaluate_one_vs_rest_transformer(path, text):
     
-    pipeline = pickle.load(open(path, "rb"))
+    pipeline = pickle.load(open(path,'rb'))
     
     if "content" in path:
         # print("content found")
@@ -381,7 +382,7 @@ def evaluate_one_vs_rest_transformer(path, text):
 
 # ONLY CHANGE IS IN THIS FX
 
-def evaluation_list_dicts(list_dicts, model_contents=r"sentence_transformer_contents_V23-18-04.sav", model_determinants=r"sentence_transformer_determinants_V23-18-04.sav"):
+def evaluation_list_dicts(list_dicts, model_contents='RorschIA_app/sentence_transformer_contents_V23-18-04.sav', model_determinants='RorschIA_app/sentence_transformer_determinants_V23-18-04.sav'):
     """This function runs the evaluation with our first two models. 
     It takes as input the list of dictionary responses, prints the evaluation 
     and returns the content and determinant labels for each response in dictionary form.   

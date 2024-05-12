@@ -2,17 +2,17 @@ import streamlit as st
 import pandas as pd
 import deepl
 from langdetect import detect
+import pickle
 
 from functions import raw_text_response_eval
 from functions import get_np
 from functions import evaluate_one_vs_rest_transformer
 
+path_contents = 'RorschIA_app/sentence_transformer_contents_V23-18-04.sav'
+path_determinants = 'RorschIA_app/sentence_transformer_determinants_V23-18-04.sav'
+
 st.title("RorschIA")
-
-text_entered = st.text_input("Paste the text of your protocol :)")
-
-
-
+text_entered = st.text_input("Paste the text of your protocol or sentence :)")
 process_button = st.button("Process")
 
 if process_button == True:
@@ -52,45 +52,45 @@ if process_button == True:
     except:
         lang = detect(text_entered)
         if lang == "fr":
-            with open("DEEPL_API_KEY.txt", "r") as f:
+            # st.write("French")
+            with open("RorschIA_app/DEEPL_API_KEY.txt", "r") as f:
                 API_KEY = f.read()
+                API_KEY = API_KEY.strip("\n")
             translator = deepl.Translator(API_KEY)
             result = translator.translate_text(text_entered, target_lang="EN-US", preserve_formatting=True)
             response = result.text
             
-            #GET NP WORKS WITH ENGLISH, no point of doing running get_np with french text
+        else: # language will be english
+            response = text_entered
             
-            content = evaluate_one_vs_rest_transformer("sentence_transformer_contents_V23-18-04.sav", response)
-            determinant = evaluate_one_vs_rest_transformer("sentence_transformer_determinants_V23-18-04.sav", response)
+        response_tuple = get_np(response) # noun phrase segmentation
+        
+        st.write("*SENTENCE*: {} ".format(text_entered))
+        
+        if response_tuple[1] == True: #    THERE IS COORDINATION!
+            response = response_tuple[0]
             
-            st.write("*Sentence*: {} ".format(text_entered))
+            format_dict = str.maketrans({"[": "" , "]": "", "'": ""})
+            formated_response = str(response).translate(format_dict)
+            st.write("Response: {} ".format(formated_response))
+            
+            for np in response:
+                content = evaluate_one_vs_rest_transformer(path_contents, response)
+                determinant = evaluate_one_vs_rest_transformer(path_determinants, response)
+                
+                
+                
+                st.write("Content for '**{}**' : {} ".format(np, content))
+                st.write("Determinant for '**{}**' : {} ".format(np, determinant))
+        
+        else: # No coordination
+            response = response_tuple[0]
+            content = evaluate_one_vs_rest_transformer(path_contents, response)
+            determinant = evaluate_one_vs_rest_transformer(path_determinants, response)
+            
             st.write("Response: {} ".format(response))
             st.write("Content: {} ".format(content))
             st.write("Determinant: {} ".format(determinant))
-            
-        else: # language will be english
-            text = text_entered
-            response_tuple = get_np(text) # noun phrase segmentation
-            if response_tuple[1] == True: #    THERE IS COORDINATION!
-                response = response_tuple[0]
-                for np in response:
-                    content = evaluate_one_vs_rest_transformer("sentence_transformer_contents_V23-18-04.sav", response)
-                    determinant = evaluate_one_vs_rest_transformer("sentence_transformer_determinants_V23-18-04.sav", response)
-                    
-                    st.write("*Sentence*: {} ".format(text_entered))
-                    st.write("Response: {} ".format(response))
-                    st.write("Content: {} ".format(content))
-                    st.write("Determinant: {} ".format(determinant))
-            
-            else: # No coordination
-                response = response_tuple[0]
-                content = evaluate_one_vs_rest_transformer("sentence_transformer_contents_V23-18-04.sav", response)
-                determinant = evaluate_one_vs_rest_transformer("sentence_transformer_determinants_V23-18-04.sav", response)
-                
-                st.write("*Sentence*: {} ".format(text_entered))
-                st.write("Response: {} ".format(response))
-                st.write("Content: {} ".format(content))
-                st.write("Determinant: {} ".format(determinant))
 
 
 
